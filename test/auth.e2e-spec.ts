@@ -27,4 +27,19 @@ describe("Auth (e2e)", () => {
         expect(email).toEqual(email);
       });
   });
+
+  it("signup as new user and get current user", async () => {
+    const email = "asdfemail@asdf.com";
+    const res = await request(app.getHttpServer())
+      .post("/auth/signup")
+      .send({ email: email, password: "asfdjkl" })
+      .expect(201);
+    const cookie = res.get("Set-Cookie");
+    const { body } = await request(app.getHttpServer())
+      .get("/auth/whoami")
+      .set("Cookie", cookie)
+      .expect(200);
+
+    expect(body.email).toEqual(email);
+  });
 });
