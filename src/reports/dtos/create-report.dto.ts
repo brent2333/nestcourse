@@ -5,7 +5,7 @@ import {
   Max,
   IsLongitude,
   IsLatitude,
-} from "class-validator";
+} from 'class-validator';
 
 export class CreateReportDto {
   @IsString()
@@ -19,16 +19,16 @@ export class CreateReportDto {
   @Max(2050)
   year: number;
 
-  @IsLatitude()
-  lat: number;
-
-  @IsLongitude()
-  lng: number;
-
   @IsNumber()
   @Min(0)
   @Max(1000000)
   mileage: number;
+
+  @IsLongitude()
+  lng: number;
+
+  @IsLatitude()
+  lat: number;
 
   @IsNumber()
   @Min(0)
